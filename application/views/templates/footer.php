@@ -53,16 +53,47 @@ $('.info-card').on('mouseleave', function() {
 <?php if ($this->session->flashdata('success_message')) : ?>
 Swal.fire({
     title: 'Berhasil!',
-    text: 'Data siswa An. ' + '<?= urldecode($nama) ?>' + ' Berhasil Ditambahkan!',
+    text: 'Data siswa An. ' + '<?= urldecode($nama) ?>' + ', Berhasil Ditambahkan!',
     icon: 'success',
     confirmButtonText: 'Okay'
+})
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('class_add_err_message')) : ?>
+Swal.fire({
+    title: 'Gagal!',
+    text: 'Data Kelas sudah ada!',
+    icon: 'error',
+    // confirmButtonText: 'Okay'
+    showConfirmButton: false,
+    timer: 1500
 })
 <?php endif; ?>
 
 <?php if ($this->session->flashdata('error_message')) : ?>
 Swal.fire({
     title: 'Gagal!',
-    text: 'Data siswa An. ' + '<?= urldecode($nama) ?>' + ' Gagal Ditambahkan!',
+    text: 'Data siswa An. ' + '<?= urldecode($nama) ?>' + ', Gagal Ditambahkan!',
+    icon: 'error',
+    // confirmButtonText: 'Okay'
+    showConfirmButton: false,
+    timer: 1500
+})
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('class_success_message')) : ?>
+Swal.fire({
+    title: 'Berhasil!',
+    text: 'Data ' + '<?= $tabel ?>' + ' : ' + '<?= urldecode($nama) ?>' + ', Berhasil Ditambahkan!',
+    icon: 'success',
+    confirmButtonText: 'Okay'
+})
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('class_error_message')) : ?>
+Swal.fire({
+    title: 'Gagal!',
+    text: 'Data ' + '<?= $tabel ?>' + ' : ' + '<?= urldecode($nama) ?>' + ', Gagal Ditambahkan!',
     icon: 'error',
     // confirmButtonText: 'Okay'
     showConfirmButton: false,
@@ -73,7 +104,7 @@ Swal.fire({
 <?php if ($this->session->flashdata('error_up_message')) : ?>
 Swal.fire({
     title: 'Gagal!',
-    text: 'Data siswa An. ' + '<?= urldecode($nama) ?>' + ' Gagal Diubah!',
+    text: 'Data siswa An. ' + '<?= urldecode($nama) ?>' + ', Gagal Diubah!',
     icon: 'error',
     showConfirmButton: false,
     timer: 1500
@@ -83,7 +114,7 @@ Swal.fire({
 <?php if ($this->session->flashdata('success_up_message')) : ?>
 Swal.fire({
     title: 'Berhasil!',
-    text: 'Data siswa An. ' + '<?= urldecode($nama) ?>' + ' Berhasil Diubah!',
+    text: 'Data siswa An. ' + '<?= urldecode($nama) ?>' + ', Berhasil Diubah!',
     icon: 'success',
     confirmButtonText: 'Okay'
 })
@@ -92,7 +123,7 @@ Swal.fire({
 <?php if ($this->session->flashdata('acc_error_up_message')) : ?>
 Swal.fire({
     title: 'Gagal!',
-    text: 'Data Akun An. ' + '<?= urldecode($nama) ?>' + ' Gagal Diubah!',
+    text: 'Data Akun An. ' + '<?= urldecode($nama) ?>' + ', Gagal Diubah!',
     icon: 'error',
     showConfirmButton: false,
     timer: 1500
@@ -102,7 +133,26 @@ Swal.fire({
 <?php if ($this->session->flashdata('acc_success_up_message')) : ?>
 Swal.fire({
     title: 'Berhasil!',
-    text: 'Data Akun An. ' + '<?= urldecode($nama) ?>' + ' Berhasil Diubah!',
+    text: 'Data Akun An. ' + '<?= urldecode($nama) ?>' + ', Berhasil Diubah!',
+    icon: 'success',
+    confirmButtonText: 'Okay'
+})
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('class_error_up_message')) : ?>
+Swal.fire({
+    title: 'Gagal!',
+    text: 'Data ' + $tingkat + ' : ' + '<?= urldecode($nama) ?>' + ', Gagal Diubah!',
+    icon: 'error',
+    showConfirmButton: false,
+    timer: 1500
+})
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('class_success_up_message')) : ?>
+Swal.fire({
+    title: 'Berhasil!',
+    text: 'Data ' + '<?= $tabel ?>' + ' : ' + '<?= urldecode($nama) ?>' + ', Berhasil Diubah!',
     icon: 'success',
     confirmButtonText: 'Okay'
 })
@@ -136,7 +186,7 @@ function logout() {
 <?php if ($this->session->flashdata('delete_message')) : ?>
 Swal.fire({
     title: 'Berhasil!',
-    text: 'Data siswa An. ' + '<?= $nama ?>' + ' Berhasil Dihapus!',
+    text: 'Data siswa An. ' + '<?= $nama ?>' + ', Berhasil Dihapus!',
     icon: 'success',
     showConfirmButton: false,
     timer: 2000
@@ -146,7 +196,17 @@ Swal.fire({
 <?php if ($this->session->flashdata('acc_delete_message')) : ?>
 Swal.fire({
     title: 'Berhasil!',
-    text: 'Data Akun An. ' + '<?= $nama ?>' + ' Berhasil Dihapus!',
+    text: 'Data Akun An. ' + '<?= $nama ?>' + ', Berhasil Dihapus!',
+    icon: 'success',
+    showConfirmButton: false,
+    timer: 2000
+})
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('class_delete_message')) : ?>
+Swal.fire({
+    title: 'Berhasil!',
+    text: 'Data ' + '<?= $tabel ?>' + ' : ' + '<?= $nama ?>' + ', Berhasil Dihapus!',
     icon: 'success',
     showConfirmButton: false,
     timer: 2000
@@ -176,6 +236,32 @@ function hapus(id, nama) {
     }).then((result) => {
         if (result.isConfirmed) {
             window.location.replace(baseUrl + 'Admin/hapus/' + id + '/' + nama);
+        }
+    });
+}
+
+function hapus_kelas(id, nama, tabel) {
+    Swal.fire({
+        title: 'Yakin ingin menghapus?',
+        showDenyButton: true,
+        confirmButtonText: 'Ya',
+        denyButtonText: `Batal`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.replace(baseUrl + 'Admin/hapus_kelas/' + id + '/' + nama + '/' + tabel);
+        }
+    });
+}
+
+function hapus_data_kelas(id) {
+    Swal.fire({
+        title: 'Yakin ingin menghapus?',
+        showDenyButton: true,
+        confirmButtonText: 'Ya',
+        denyButtonText: `Batal`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.replace(baseUrl + 'Admin/hapus_data_kelas/' + id);
         }
     });
 }
@@ -248,6 +334,29 @@ if (window.self == window.top) {
     <path id="SvgjsPath1154"
         d="M-1 270.2L-1 270.2C-1 270.2 128.2247596153846 270.2 128.2247596153846 270.2C128.2247596153846 270.2 213.7079326923077 270.2 213.7079326923077 270.2C213.7079326923077 270.2 299.1911057692308 270.2 299.1911057692308 270.2C299.1911057692308 270.2 384.67427884615387 270.2 384.67427884615387 270.2C384.67427884615387 270.2 470.15745192307696 270.2 470.15745192307696 270.2C470.15745192307696 270.2 555.640625 270.2 555.640625 270.2C555.640625 270.2 555.640625 270.2 555.640625 270.2 ">
     </path>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

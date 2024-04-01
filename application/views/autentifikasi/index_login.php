@@ -145,5 +145,5 @@
 
 
 
-        </m ain><!-- End #main -->
+    </main><!-- End #main -->
 </body>

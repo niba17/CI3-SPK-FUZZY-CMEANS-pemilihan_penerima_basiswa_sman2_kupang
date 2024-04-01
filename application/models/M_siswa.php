@@ -19,11 +19,16 @@ class M_siswa extends CI_Model
 		return $this->db->get('admin')->result();
 	}
 
+	public function data($table)
+	{
+		return $this->db->get($table)->result();
+	}
+
 	public function getRandom()
 	{
 		return [
 			'random' => $this->db->get('random')->result_array(),
-			'random2' =>  $this->db->get('random2')->result_array()
+			'random2' => $this->db->get('random2')->result_array(),
 		];
 	}
 
@@ -56,6 +61,56 @@ class M_siswa extends CI_Model
 		}
 	}
 
+	public function inputDataTingkat($data)
+	{
+		$query = $this->db->insert('tingkat', $data);
+		if ($query == true) {
+			$this->session->set_flashdata('class_success_message', '<div class="alert alert-success" role="alert">Sukses!</div>');
+			redirect(base_url('Admin/index_data_tingkat/' . $data['nama'] . '/' . 'tingkat'));
+		} else {
+			$this->session->set_flashdata('class_error_message', '<div class="alert alert-danger" role="alert">Gagal!</div>');
+			redirect(base_url('Admin/index_input_tingkat/' . $data['nama']));
+		}
+	}
+
+	public function inputDataJurusan($data)
+	{
+		$query = $this->db->insert('jurusan', $data);
+		if ($query == true) {
+			$this->session->set_flashdata('class_success_message', '<div class="alert alert-success" role="alert">Sukses!</div>');
+			redirect(base_url('Admin/index_data_jurusan/' . $data['nama'] . '/' . 'jurusan'));
+		} else {
+			$this->session->set_flashdata('class_error_message', '<div class="alert alert-danger" role="alert">Gagal!</div>');
+			redirect(base_url('Admin/index_input_jurusan/' . $data['nama']));
+		}
+	}
+
+	public function inputDataNamaKelas($data)
+	{
+		$query = $this->db->insert('nama_kelas', $data);
+		if ($query == true) {
+			$this->session->set_flashdata('class_success_message', '<div class="alert alert-success" role="alert">Sukses!</div>');
+			redirect(base_url('Admin/index_data_nama_kelas/' . $data['nama'] . '/' . 'nama_kelas'));
+		} else {
+			$this->session->set_flashdata('class_error_message', '<div class="alert alert-danger" role="alert">Gagal!</div>');
+			redirect(base_url('Admin/index_input_nama_kelas/' . $data['nama']));
+		}
+	}
+
+	public function inputDataKelas($data)
+	{
+		$query = $this->db->insert('kelas', $data);
+		$this->db->where('id', $data['id']);
+		$nama_kelas = $this->db->get('nama_kelas')->row();
+		if ($query == true) {
+			$this->session->set_flashdata('class_success_message', '<div class="alert alert-success" role="alert">Sukses!</div>');
+			redirect(base_url('Admin/index_data_kelas/' . $nama_kelas->nama . '/' . 'kelas'));
+		} else {
+			$this->session->set_flashdata('class_error_message', '<div class="alert alert-danger" role="alert">Gagal!</div>');
+			redirect(base_url('Admin/index_input_nama_kelas/' . $nama_kelas->nama));
+		}
+	}
+
 	public function editDataSiswa($dataUpdate, $id)
 	{
 		$this->db->where('id_siswa', $id);
@@ -83,10 +138,72 @@ class M_siswa extends CI_Model
 		}
 	}
 
+	public function editDataTingkat($dataUpdate, $id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->update('tingkat', $dataUpdate);
+		if ($query == true) {
+			$this->session->set_flashdata('class_success_up_message', '<div class="alert alert-success" role="alert">Sukses!</div>');
+			redirect(base_url('Admin/index_data_tingkat/' . $dataUpdate['nama'] . '/' . 'tingkat'));
+		} else {
+			$this->session->set_flashdata('class_error_up_message', '<div class="alert alert-danger" role="alert">Gagal!</div>');
+			redirect(base_url('Admin/index_ubah_data_tingkat/' . $id, '/' . 'tingkat'));
+		}
+	}
+
+	public function editDataJurusan($dataUpdate, $id)
+	{
+
+		$this->db->where('id', $id);
+		$query = $this->db->update('jurusan', $dataUpdate);
+		if ($query == true) {
+			$this->session->set_flashdata('class_success_up_message', '<div class="alert alert-success" role="alert">Sukses!</div>');
+			redirect(base_url('Admin/index_data_jurusan/' . $dataUpdate['nama'] . '/' . 'jurusan'));
+		} else {
+			$this->session->set_flashdata('class_error_up_message', '<div class="alert alert-danger" role="alert">Gagal!</div>');
+			redirect(base_url('Admin/index_ubah_data_jurusan/' . $id, '/' . 'jurusan'));
+		}
+	}
+
+	public function editDataNamaKelas($dataUpdate, $id)
+	{
+
+		$this->db->where('id', $id);
+		$query = $this->db->update('nama_kelas', $dataUpdate);
+		if ($query == true) {
+			$this->session->set_flashdata('class_success_up_message', '<div class="alert alert-success" role="alert">Sukses!</div>');
+			redirect(base_url('Admin/index_data_nama_kelas/' . $dataUpdate['nama'] . '/' . 'nama_kelas'));
+		} else {
+			$this->session->set_flashdata('class_error_up_message', '<div class="alert alert-danger" role="alert">Gagal!</div>');
+			redirect(base_url('Admin/index_ubah_data_nama_kelas/' . $id, '/' . 'nama_kelas'));
+		}
+	}
+
+	public function editDataKelas($dataUpdate, $id)
+	{
+		// var_dump($id);
+		// die;
+		$this->db->where('id', $id);
+		$query = $this->db->update('kelas', $dataUpdate);
+		if ($query == true) {
+			$this->session->set_flashdata('class_success_up_message', '<div class="alert alert-success" role="alert">Sukses!</div>');
+			redirect(base_url('Admin/index_data_kelas/' . $dataUpdate['nama'] . '/' . 'kelas'));
+		} else {
+			$this->session->set_flashdata('class_error_up_message', '<div class="alert alert-danger" role="alert">Gagal!</div>');
+			redirect(base_url('Admin/index_ubah_data_kelas/' . $id, '/' . 'kelas'));
+		}
+	}
+
 	public function getDataSiswaDetail($id)
 	{
 		$this->db->where('id_siswa', $id);
 		return $this->db->get('siswa')->row();
+	}
+
+	public function getDataDetail($id, $tabel)
+	{
+		$this->db->where('id', $id);
+		return $this->db->get($tabel)->row();
 	}
 
 	public function hapusDataSiswa($id, $nama)
@@ -109,6 +226,26 @@ class M_siswa extends CI_Model
 		}
 	}
 
+	public function hapusDataKelas($id, $nama, $tabel)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->delete($tabel);
+		if ($query == true) {
+			$this->session->set_flashdata('class_delete_message', '<div class="alert alert-success" role="alert">Berhasil!</div>');
+			redirect(base_url('Admin/index_data_' . $tabel . '/' . $nama . '/' . $tabel));
+		}
+	}
+
+	public function hapusKelas($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->delete('kelas');
+		if ($query == true) {
+			$this->session->set_flashdata('class_delete_message', '<div class="alert alert-success" role="alert">Berhasil!</div>');
+			redirect(base_url('Admin/index_data_kelas'));
+		}
+	}
+
 	public function CountRow()
 	{
 		return $this->db->count_all('siswa');
@@ -124,87 +261,87 @@ class M_siswa extends CI_Model
 		$data['bobot_tl'] = [];
 		$data['bobot_nr'] = [];
 
-		for ($i = 0; $i < $data['baris']; $i++) {
-			if ($data['siswa'][$i]->tanggungan_ortu == 1) {
-				$data['bobot_jt_ortu'][$i] = 0;
-			}
-			if ($data['siswa'][$i]->tanggungan_ortu == 2) {
-				$data['bobot_jt_ortu'][$i] = 0.25;
-			}
-			if ($data['siswa'][$i]->tanggungan_ortu == 3) {
-				$data['bobot_jt_ortu'][$i] = 0.5;
-			}
-			if ($data['siswa'][$i]->tanggungan_ortu == 4) {
-				$data['bobot_jt_ortu'][$i] = 0.75;
-			}
-			if ($data['siswa'][$i]->tanggungan_ortu > 4) {
-				$data['bobot_jt_ortu'][$i] = 1;
-			}
-			if ($data['siswa'][$i]->penghasilan_ortu >= 5000000) {
-				$data['bobot_p_ortu'][$i] = 0;
-			}
-			if ($data['siswa'][$i]->penghasilan_ortu >= 3000000 && $data['siswa'][$i]->penghasilan_ortu < 5000000) {
-				$data['bobot_p_ortu'][$i] = 0.25;
-			}
-			if ($data['siswa'][$i]->penghasilan_ortu >= 1500000 && $data['siswa'][$i]->penghasilan_ortu < 3000000) {
-				$data['bobot_p_ortu'][$i] = 0.5;
-			}
-			if ($data['siswa'][$i]->penghasilan_ortu >= 1000000 && $data['siswa'][$i]->penghasilan_ortu < 1500000) {
-				$data['bobot_p_ortu'][$i] = 0.75;
-			}
-			if ($data['siswa'][$i]->penghasilan_ortu < 1000000) {
-				$data['bobot_p_ortu'][$i] = 1;
-			}
+		// for ($i = 0; $i < $data['baris']; $i++) {
+		// 	if ($data['siswa'][$i]->tanggungan_ortu == 1) {
+		// 		$data['bobot_jt_ortu'][$i] = 0;
+		// 	}
+		// 	if ($data['siswa'][$i]->tanggungan_ortu == 2) {
+		// 		$data['bobot_jt_ortu'][$i] = 0.25;
+		// 	}
+		// 	if ($data['siswa'][$i]->tanggungan_ortu == 3) {
+		// 		$data['bobot_jt_ortu'][$i] = 0.5;
+		// 	}
+		// 	if ($data['siswa'][$i]->tanggungan_ortu == 4) {
+		// 		$data['bobot_jt_ortu'][$i] = 0.75;
+		// 	}
+		// 	if ($data['siswa'][$i]->tanggungan_ortu > 4) {
+		// 		$data['bobot_jt_ortu'][$i] = 1;
+		// 	}
 
-			if ($data['siswa'][$i]->tagihan_air >= 300000) {
-				$data['bobot_ta'][$i] = 0;
-			}
-			if ($data['siswa'][$i]->tagihan_air >= 200000 && $data['siswa'][$i]->tagihan_air < 300000) {
-				$data['bobot_ta'][$i] = 0.25;
-			}
-			if ($data['siswa'][$i]->tagihan_air >= 100000 && $data['siswa'][$i]->tagihan_air < 200000) {
-				$data['bobot_ta'][$i] = 0.5;
-			}
-			if ($data['siswa'][$i]->tagihan_air >= 50000 && $data['siswa'][$i]->tagihan_air < 100000) {
-				$data['bobot_ta'][$i] = 0.75;
-			}
-			if ($data['siswa'][$i]->tagihan_air < 50000) {
-				$data['bobot_ta'][$i] = 1;
-			}
+		// 	if ($data['siswa'][$i]->penghasilan_ortu >= 5000000) {
+		// 		$data['bobot_p_ortu'][$i] = 0;
+		// 	}
+		// 	if ($data['siswa'][$i]->penghasilan_ortu >= 3000000 && $data['siswa'][$i]->penghasilan_ortu < 5000000) {
+		// 		$data['bobot_p_ortu'][$i] = 0.25;
+		// 	}
+		// 	if ($data['siswa'][$i]->penghasilan_ortu >= 1500000 && $data['siswa'][$i]->penghasilan_ortu < 3000000) {
+		// 		$data['bobot_p_ortu'][$i] = 0.5;
+		// 	}
+		// 	if ($data['siswa'][$i]->penghasilan_ortu >= 1000000 && $data['siswa'][$i]->penghasilan_ortu < 1500000) {
+		// 		$data['bobot_p_ortu'][$i] = 0.75;
+		// 	}
+		// 	if ($data['siswa'][$i]->penghasilan_ortu < 1000000) {
+		// 		$data['bobot_p_ortu'][$i] = 1;
+		// 	}
 
-			if ($data['siswa'][$i]->tagihan_listrik >= 300000) {
-				$data['bobot_tl'][$i] = 0;
-			}
-			if ($data['siswa'][$i]->tagihan_listrik >= 200000 && $data['siswa'][$i]->tagihan_listrik < 300000) {
-				$data['bobot_tl'][$i] = 0.25;
-			}
-			if ($data['siswa'][$i]->tagihan_listrik >= 100000 && $data['siswa'][$i]->tagihan_listrik < 200000) {
-				$data['bobot_tl'][$i] = 0.5;
-			}
-			if ($data['siswa'][$i]->tagihan_listrik >= 50000 && $data['siswa'][$i]->tagihan_listrik < 100000) {
-				$data['bobot_tl'][$i] = 0.75;
-			}
-			if ($data['siswa'][$i]->tagihan_listrik < 50000) {
-				$data['bobot_tl'][$i] = 1;
-			}
+		// 	if ($data['siswa'][$i]->tagihan_air >= 300000) {
+		// 		$data['bobot_ta'][$i] = 0;
+		// 	}
+		// 	if ($data['siswa'][$i]->tagihan_air >= 200000 && $data['siswa'][$i]->tagihan_air < 300000) {
+		// 		$data['bobot_ta'][$i] = 0.25;
+		// 	}
+		// 	if ($data['siswa'][$i]->tagihan_air >= 100000 && $data['siswa'][$i]->tagihan_air < 200000) {
+		// 		$data['bobot_ta'][$i] = 0.5;
+		// 	}
+		// 	if ($data['siswa'][$i]->tagihan_air >= 50000 && $data['siswa'][$i]->tagihan_air < 100000) {
+		// 		$data['bobot_ta'][$i] = 0.75;
+		// 	}
+		// 	if ($data['siswa'][$i]->tagihan_air < 50000) {
+		// 		$data['bobot_ta'][$i] = 1;
+		// 	}
 
+		// 	if ($data['siswa'][$i]->tagihan_listrik >= 300000) {
+		// 		$data['bobot_tl'][$i] = 0;
+		// 	}
+		// 	if ($data['siswa'][$i]->tagihan_listrik >= 200000 && $data['siswa'][$i]->tagihan_listrik < 300000) {
+		// 		$data['bobot_tl'][$i] = 0.25;
+		// 	}
+		// 	if ($data['siswa'][$i]->tagihan_listrik >= 100000 && $data['siswa'][$i]->tagihan_listrik < 200000) {
+		// 		$data['bobot_tl'][$i] = 0.5;
+		// 	}
+		// 	if ($data['siswa'][$i]->tagihan_listrik >= 50000 && $data['siswa'][$i]->tagihan_listrik < 100000) {
+		// 		$data['bobot_tl'][$i] = 0.75;
+		// 	}
+		// 	if ($data['siswa'][$i]->tagihan_listrik < 50000) {
+		// 		$data['bobot_tl'][$i] = 1;
+		// 	}
 
-			if ($data['siswa'][$i]->nilai_raport <= 60) {
-				$data['bobot_nr'][$i] = 0;
-			}
-			if ($data['siswa'][$i]->nilai_raport > 60 && $data['siswa'][$i]->nilai_raport <= 69.99) {
-				$data['bobot_nr'][$i] = 0.25;
-			}
-			if ($data['siswa'][$i]->nilai_raport > 69.99 && $data['siswa'][$i]->nilai_raport <= 79.99) {
-				$data['bobot_nr'][$i] = 0.5;
-			}
-			if ($data['siswa'][$i]->nilai_raport > 79.99 && $data['siswa'][$i]->nilai_raport <= 89.99) {
-				$data['bobot_nr'][$i] = 0.75;
-			}
-			if ($data['siswa'][$i]->nilai_raport > 89.99 && $data['siswa'][$i]->nilai_raport <= 100) {
-				$data['bobot_nr'][$i] = 1;
-			}
-		}
+		// 	if ($data['siswa'][$i]->nilai_raport <= 60) {
+		// 		$data['bobot_nr'][$i] = 0;
+		// 	}
+		// 	if ($data['siswa'][$i]->nilai_raport > 60 && $data['siswa'][$i]->nilai_raport <= 69.99) {
+		// 		$data['bobot_nr'][$i] = 0.25;
+		// 	}
+		// 	if ($data['siswa'][$i]->nilai_raport > 69.99 && $data['siswa'][$i]->nilai_raport <= 79.99) {
+		// 		$data['bobot_nr'][$i] = 0.5;
+		// 	}
+		// 	if ($data['siswa'][$i]->nilai_raport > 79.99 && $data['siswa'][$i]->nilai_raport <= 89.99) {
+		// 		$data['bobot_nr'][$i] = 0.75;
+		// 	}
+		// 	if ($data['siswa'][$i]->nilai_raport > 89.99 && $data['siswa'][$i]->nilai_raport <= 100) {
+		// 		$data['bobot_nr'][$i] = 1;
+		// 	}
+		// }
 
 		$data1 = array();
 		for ($i = 0; $i < $data['baris']; $i++) {
@@ -212,12 +349,17 @@ class M_siswa extends CI_Model
 				$this->db->empty_table('kriteria');
 			}
 			$data1 = array(
-				'tanggungan_ortu' => $data['bobot_jt_ortu'][$i],
-				'penghasilan_ortu' => $data['bobot_p_ortu'][$i],
-				'tagihan_air' => $data['bobot_ta'][$i],
-				'tagihan_listrik' => $data['bobot_tl'][$i],
-				'nilai_raport' => $data['bobot_nr'][$i]
+				'tanggungan_ortu' => $data['siswa'][$i]->tanggungan_ortu,
+				'penghasilan_ortu' => $data['siswa'][$i]->penghasilan_ortu,
+				'tagihan_air' => $data['siswa'][$i]->tagihan_air,
+				'tagihan_listrik' => $data['siswa'][$i]->tagihan_listrik,
+				'nilai_raport' => $data['siswa'][$i]->nilai_raport,
 			);
+			$data['bobot_jt_ortu'][$i] = $data['siswa'][$i]->tanggungan_ortu;
+			$data['bobot_p_ortu'][$i] = $data['siswa'][$i]->penghasilan_ortu;
+			$data['bobot_ta'][$i] = $data['siswa'][$i]->tagihan_air;
+			$data['bobot_tl'][$i] = $data['siswa'][$i]->tagihan_listrik;
+			$data['bobot_nr'][$i] = $data['siswa'][$i]->nilai_raport;
 			$this->db->where('id_kriteria');
 			$this->db->insert('kriteria', $data1);
 		}
@@ -226,7 +368,7 @@ class M_siswa extends CI_Model
 			'1' => $data['bobot_p_ortu'],
 			'2' => $data['bobot_ta'],
 			'3' => $data['bobot_tl'],
-			'4' => $data['bobot_nr']
+			'4' => $data['bobot_nr'],
 		);
 	}
 
@@ -243,7 +385,7 @@ class M_siswa extends CI_Model
 				$this->db->empty_table('random');
 			}
 			$data1 = array(
-				'data' => $data['random'][$i]
+				'data' => $data['random'][$i],
 			);
 			$this->db->where('id');
 			$this->db->insert('random', $data1);
@@ -264,7 +406,7 @@ class M_siswa extends CI_Model
 				$this->db->empty_table('random2');
 			}
 			$data1 = array(
-				'data' => $data['random2'][$i]
+				'data' => $data['random2'][$i],
 			);
 			$this->db->where('id');
 			$this->db->insert('random2', $data1);
@@ -284,7 +426,7 @@ class M_siswa extends CI_Model
 			6 => ['data' => "0.897"],
 			7 => ['data' => "0.278"],
 			8 => ['data' => "0.556"],
-			9 => ['data' => "0.338"]
+			9 => ['data' => "0.338"],
 		];
 	}
 
@@ -300,11 +442,11 @@ class M_siswa extends CI_Model
 			6 => ['data' => "0.103"],
 			7 => ['data' => "0.722"],
 			8 => ['data' => "0.444"],
-			9 => ['data' => "0.662"]
+			9 => ['data' => "0.662"],
 		];
 	}
 
-	public function literasi($key = null)
+	public function literasi($error_terkecil, $max_iterasi, $key = null)
 	{
 		$data['baris'] = $this->M_siswa->CountRow();
 		$data['random'][] = $this->db->get('random')->result_array();
@@ -388,7 +530,7 @@ class M_siswa extends CI_Model
 		$data['error'][0] = 1;
 		$data['f0'] = [];
 		$literasi = 0;
-		$error_terkecil = 0.01;
+		// $error_terkecil = 0.01;
 
 		if ($key == null) {
 			$literasi = 999;
@@ -463,21 +605,21 @@ class M_siswa extends CI_Model
 			endfor;
 
 			//pusat cluster 1 & 2
-			$PC1 =  $JP1 / $JP0;
-			$PC2 =  $JP2 / $JP0;
-			$PC3 =  $JP3 / $JP0;
-			$PC4 =  $JP4 / $JP0;
-			$PC5 =  $JP5 / $JP0;
-			$PC1_2 =  $JP1_2 / $JP0_2;
-			$PC2_2 =  $JP2_2 / $JP0_2;
-			$PC3_2 =  $JP3_2 / $JP0_2;
-			$PC4_2 =  $JP4_2 / $JP0_2;
-			$PC5_2 =  $JP5_2 / $JP0_2;
+			$PC1 = $JP1 / $JP0;
+			$PC2 = $JP2 / $JP0;
+			$PC3 = $JP3 / $JP0;
+			$PC4 = $JP4 / $JP0;
+			$PC5 = $JP5 / $JP0;
+			$PC1_2 = $JP1_2 / $JP0_2;
+			$PC2_2 = $JP2_2 / $JP0_2;
+			$PC3_2 = $JP3_2 / $JP0_2;
+			$PC4_2 = $JP4_2 / $JP0_2;
+			$PC5_2 = $JP5_2 / $JP0_2;
 			$index++;
 
 			for ($k = 0; $k < $data['baris']; $k++) :
 
-				//fungsi objektif cluster 1 
+				//fungsi objektif cluster 1
 				$data['C1P1'][$k] = ($data['x1'][$k] - $PC1) * ($data['x1'][$k] - $PC1);
 				$data['C1P2'][$k] = ($data['x2'][$k] - $PC2) * ($data['x2'][$k] - $PC2);
 				$data['C1P3'][$k] = ($data['x3'][$k] - $PC3) * ($data['x3'][$k] - $PC3);
@@ -485,7 +627,7 @@ class M_siswa extends CI_Model
 				$data['C1P5'][$k] = ($data['x5'][$k] - $PC5) * ($data['x5'][$k] - $PC5);
 				$data['TC1'][$k] = $data['C1P1'][$k] + $data['C1P2'][$k] + $data['C1P3'][$k] + $data['C1P4'][$k] + $data['C1P5'][$k];
 
-				//fungsi objektif cluster 1 
+				//fungsi objektif cluster 1
 				$data['C2P1'][$k] = ($data['x1'][$k] - $PC1_2) * ($data['x1'][$k] - $PC1_2);
 				$data['C2P2'][$k] = ($data['x2'][$k] - $PC2_2) * ($data['x2'][$k] - $PC2_2);
 				$data['C2P3'][$k] = ($data['x3'][$k] - $PC3_2) * ($data['x3'][$k] - $PC3_2);
@@ -493,7 +635,7 @@ class M_siswa extends CI_Model
 				$data['C2P5'][$k] = ($data['x5'][$k] - $PC5_2) * ($data['x5'][$k] - $PC5_2);
 				$data['TC2'][$k] = $data['C2P1'][$k] + $data['C2P2'][$k] + $data['C2P3'][$k] + $data['C2P4'][$k] + $data['C2P5'][$k];
 
-				//total pusat cluster 1&2 
+				//total pusat cluster 1&2
 				$data['TPC12'][$k] = ($data['TC1'][$k] * $data['P0'][$k]) + ($data['TC2'][$k] * $data['P0_2'][$k]);
 
 				//fungsi objektif total pusat cluster 1 & 2
@@ -513,7 +655,11 @@ class M_siswa extends CI_Model
 			if ($j > 0) {
 				$data['error'][$j] = $data['f0'][$j - 1] - $data['f0'][$j];
 			}
+
 			$literasi2++;
+			if ($j == $max_iterasi - 1) {
+				$literasi = 0;
+			}
 			if ($data['error'][$j] < $error_terkecil) {
 				$literasi = 0;
 			}
@@ -593,7 +739,7 @@ class M_siswa extends CI_Model
 			'51' => $data['error'],
 			'52' => $data['f0'],
 			'53' => $data['random'],
-			'54' => $data['random2']
+			'54' => $data['random2'],
 		);
 	}
 }

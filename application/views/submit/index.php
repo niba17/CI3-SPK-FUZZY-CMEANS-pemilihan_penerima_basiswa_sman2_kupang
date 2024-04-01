@@ -21,8 +21,8 @@
                             </thead>
                             <tbody>
                                 <tr class="font-weight-bold" style="background-color:#f9c4f3;">
-                                    <td>Jumlah Tanggungan</td>
-                                    <td>Bobot</td>
+                                    <td class="font-weight-bold">Jumlah Tanggungan</td>
+                                    <td class="font-weight-bold">Bobot</td>
                                 </tr>
                                 <tr>
                                     <td>1 Anak</td>
@@ -57,8 +57,8 @@
                             </thead>
                             <tbody>
                                 <tr class="font-weight-bold" style="background-color:#f9c4f3;">
-                                    <td>Jumlah Penghasilan</td>
-                                    <td>Bobot</td>
+                                    <td class="font-weight-bold">Jumlah Penghasilan</td>
+                                    <td class="font-weight-bold">Bobot</td>
                                 </tr>
                                 <tr>
                                     <td> >= 5.000.000</td>
@@ -95,9 +95,9 @@
                                 <th class="table-primary" colspan="2">Tagihan Air/bulan</th>
                             </thead>
                             <tbody>
-                                <tr class="font-weight-bold" style="background-color:#f9c4f3;">
-                                    <td>Jumlah Tagihan</td>
-                                    <td>Bobot</td>
+                                <tr style="background-color:#f9c4f3;">
+                                    <td class="font-weight-bold">Jumlah Tagihan</td>
+                                    <td class="font-weight-bold">Bobot</td>
                                 </tr>
                                 <tr>
                                     <td>>= 300.000 </td>
@@ -133,8 +133,8 @@
                             </thead>
                             <tbody>
                                 <tr class="font-weight-bold" style="background-color:#f9c4f3;">
-                                    <td>Jumlah Tagihan</td>
-                                    <td>Bobot</td>
+                                    <td class="font-weight-bold">Jumlah Tagihan</td>
+                                    <td class="font-weight-bold">Bobot</td>
                                 </tr>
                                 <tr>
                                     <td>>= 300.000 </td>
@@ -172,8 +172,8 @@
                             </thead>
                             <tbody>
                                 <tr class="font-weight-bold" style="background-color:#f9c4f3;">
-                                    <td>Nilai</td>
-                                    <td>Bobot</td>
+                                    <td class="font-weight-bold">Nilai</td>
+                                    <td class="font-weight-bold">Bobot</td>
                                 </tr>
                                 <tr>
                                     <td>0-20</td>
@@ -207,6 +207,10 @@
 
         </div>
     </div>
+
+
+
+
 
 
 

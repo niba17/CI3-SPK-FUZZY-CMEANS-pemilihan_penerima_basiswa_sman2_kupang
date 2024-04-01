@@ -92,7 +92,7 @@
         <section id="features" class="features" data-aos="fade-up">
             <div class="container">
                 <div class="section-title">
-                    <h2>Frameworks & Libaries</h2>
+                    <h2>Framework & Libaries</h2>
                     <p>Untuk pemeliharaan sistem dan kinerja back-end serta front-end yang responsif,
                         pengembang menggunakan
                         teknologi framework yang terpopuler pada bahasa pemrogramannya</p>
@@ -540,6 +540,7 @@
 
     <script>
     if (window.self == window.top) {
+
 
 
         window.dataLayer = window.dataLayer || [];

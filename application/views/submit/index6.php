@@ -5,9 +5,10 @@
     </div>
     <hr class="sidebar-divider">
 
-    <a href="<?= base_url('Submit/literasi/') . $key; ?>" class="btn btn-sm btn-primary"><i
-            class="fa-solid fa-angles-left"></i> Kembali</a>
-    <a href="<?= base_url('Submit/memperbaharui_n_u/') . $key; ?>" class="btn btn-sm btn-primary">Memperbaharui Nilai U
+    <a href="<?= base_url('Submit/literasi/') . $error_terkecil . '/' . $max_iterasi . '/' . $key; ?>"
+        class="btn btn-sm btn-primary"><i class="fa-solid fa-angles-left"></i> Kembali</a>
+    <a href="<?= base_url('Submit/memperbaharui_n_u/') . $error_terkecil . '/' . $max_iterasi . '/' . $key; ?>"
+        class="btn btn-sm btn-primary">Memperbaharui Nilai U
         <i class="fa-solid fa-angles-right"></i></a>
 
     <div class="card mt-3">
@@ -41,13 +42,13 @@
                             <tbody>
                                 <?php for ($i = 0; $i < $baris; $i++) : ?>
                                 <tr>
-                                    <td><?= $literasi['34'][$i]; ?></td>
-                                    <td><?= $literasi['35'][$i]; ?></td>
-                                    <td><?= $literasi['36'][$i]; ?></td>
-                                    <td><?= $literasi['37'][$i]; ?></td>
-                                    <td><?= $literasi['38'][$i]; ?></td>
-                                    <td><?= $literasi['39'][$i]; ?></td>
-                                    <td><?= $literasi['0'][$i] * $literasi['39'][$i] ?></td>
+                                    <td><?= number_format($literasi['34'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['35'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['36'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['37'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['38'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['39'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['0'][$i] * $literasi['39'][$i], 5, '.', ''); ?></td>
                                 </tr>
                                 <?php endfor; ?>
                                 <tr class="font-weight-bold" style="background-color:#ECBAE7;">
@@ -69,13 +70,14 @@
                                 </tr>
                                 <?php for ($i = 0; $i < $baris; $i++) : ?>
                                 <tr>
-                                    <td><?= $literasi['40'][$i]; ?></td>
-                                    <td><?= $literasi['41'][$i]; ?></td>
-                                    <td><?= $literasi['42'][$i]; ?></td>
-                                    <td><?= $literasi['43'][$i]; ?></td>
-                                    <td><?= $literasi['44'][$i]; ?></td>
-                                    <td><?= $literasi['45'][$i]; ?></td>
-                                    <td><?= $literasi['17'][$i] * $literasi['45'][$i]; ?></td>
+                                    <td><?= number_format($literasi['40'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['41'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['42'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['43'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['44'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['45'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['17'][$i] * $literasi['45'][$i], 5, '.', ''); ?>
+                                    </td>
                                 </tr>
                                 <?php endfor; ?>
                             </tbody>
@@ -102,9 +104,10 @@
                                 <?php $jumlah = 0;
 								for ($i = 0; $i < $baris; $i++) : ?>
                                 <tr>
-                                    <td><?= $literasi['0'][$i] * $literasi['39'][$i] ?></td>
-                                    <td><?= $literasi['17'][$i] * $literasi['45'][$i]; ?></td>
-                                    <td><?= ($literasi['0'][$i] * $literasi['39'][$i]) + ($literasi['17'][$i] * $literasi['45'][$i]) ?>
+                                    <td><?= number_format($literasi['0'][$i] * $literasi['39'][$i], 5, '.', ''); ?></td>
+                                    <td><?= number_format($literasi['17'][$i] * $literasi['45'][$i], 5, '.', '');; ?>
+                                    </td>
+                                    <td><?= number_format(($literasi['0'][$i] * $literasi['39'][$i]) + ($literasi['17'][$i] * $literasi['45'][$i]), 5, '.', '');  ?>
                                     </td>
                                 </tr>
 
@@ -112,7 +115,7 @@
 								endfor; ?>
                                 <tr>
                                     <td class="font-weight-bold table-primary" colspan="2">Jumlah</td>
-                                    <td><?= $jumlah ?></td>
+                                    <td><?= number_format($jumlah, 5, '.', ''); ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -125,6 +128,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 
 

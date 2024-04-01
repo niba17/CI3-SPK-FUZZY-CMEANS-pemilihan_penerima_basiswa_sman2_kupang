@@ -5,10 +5,10 @@
     </div>
     <hr class="sidebar-divider">
 
-    <a href="<?= base_url('Submit/fungsi_objektif/') . $key; ?>" class="btn btn-sm btn-primary"><i
-            class="fa-solid fa-angles-left"></i> Kembali</a>
-    <a href="<?= base_url('Submit/matrix_u_baru/') . $key; ?>" class="btn btn-sm btn-primary">Matrix U Baru <i
-            class="fa-solid fa-angles-right"></i></a>
+    <a href="<?= base_url('Submit/fungsi_objektif/') . $error_terkecil . '/' . $max_iterasi . '/' . $key; ?>"
+        class="btn btn-sm btn-primary"><i class="fa-solid fa-angles-left"></i> Kembali</a>
+    <a href="<?= base_url('Submit/matrix_u_baru/') . $error_terkecil . '/' . $max_iterasi . '/' . $key; ?>"
+        class="btn btn-sm btn-primary">Matrix U Baru <i class="fa-solid fa-angles-right"></i></a>
 
     <div class="card mt-3">
         <div class="card-body">
@@ -30,10 +30,12 @@
                                 </tr>
                                 <?php for ($i = 0; $i < $baris; $i++) : ?>
                                 <tr>
-                                    <td><?= $literasi['39'][$i]; ?></td>
-                                    <td><?= $literasi['45'][$i]; ?></td>
-                                    <td><?= $literasi['39'][$i] / ($literasi['39'][$i] + $literasi['45'][$i]) ?></td>
-                                    <td><?= $literasi['45'][$i] / ($literasi['39'][$i] + $literasi['45'][$i]) ?></td>
+                                    <td><?= number_format($literasi['39'][$i], 5, '.', '');  ?></td>
+                                    <td><?= number_format($literasi['45'][$i], 5, '.', '');  ?></td>
+                                    <td><?= number_format($literasi['39'][$i] / ($literasi['39'][$i] + $literasi['45'][$i]), 5, '.', '');  ?>
+                                    </td>
+                                    <td><?= number_format($literasi['45'][$i] / ($literasi['39'][$i] + $literasi['45'][$i]), 5, '.', '');
+											?></td>
                                 </tr>
                                 <?php endfor; ?>
                             </tbody>
@@ -43,6 +45,9 @@
             </div>
         </div>
     </div>
+
+
+
 
 
 

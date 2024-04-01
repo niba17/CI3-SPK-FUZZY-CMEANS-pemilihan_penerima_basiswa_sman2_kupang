@@ -5,9 +5,11 @@
     </div>
     <hr class="sidebar-divider">
 
-    <a href="<?= base_url('Submit/tabel_literasi'); ?>" class="btn btn-sm btn-primary"><i
-            class="fa-solid fa-angles-left"></i> Kembali</a>
-    <a class="btn btn-sm btn-primary" href="<?= base_url('Admin/index_print') ?>"><i class="fa-solid fa-print"></i>
+    <a href="<?= base_url('Submit/tabel_literasi/' . $error_terkecil . '/' . $max_iterasi); ?>"
+        class="btn btn-sm btn-primary"><i class="fa-solid fa-angles-left"></i> Kembali</a>
+    <a class="btn btn-sm btn-primary"
+        href="<?= base_url('Admin/index_print/' . $error_terkecil . '/' . $max_iterasi) ?>"><i
+            class="fa-solid fa-print"></i>
         Print</a>
     <a href="<?= base_url('Admin/index_admin'); ?>" class="btn btn-sm btn-primary">Kembali ke Halaman Admin <i
             class="fa-solid fa-right-from-bracket"></i></a>
@@ -24,8 +26,8 @@
                                     <th>Nama</th>
                                     <th>k1</th>
                                     <th>k2</th>
-                                    <th>c1</th>
-                                    <th>c2</th>
+                                    <th>Diterima (<?= $j_c1; ?>)</th>
+                                    <th>Tidak Diterima (<?= $j_c2; ?>)</th>
                                     <!-- <th>Hasil</th> -->
                                 </tr>
                             </thead>
@@ -36,13 +38,15 @@
                                 <tr>
                                     <td class="font-weight-bold"><?= $no++ ?></td>
                                     <td><?= $siswa[$i]['nama'] ?></td>
-                                    <td><?= $literasi['39'][$i] / $literasi['48'][$i]; ?></td>
-                                    <td><?= $literasi['45'][$i] / $literasi['48'][$i]; ?></td>
+                                    <td><?= number_format($literasi['39'][$i] / $literasi['48'][$i], 5, '.', ''); ?>
+                                    </td>
+                                    <td><?= number_format($literasi['45'][$i] / $literasi['48'][$i], 5, '.', ''); ?>
+                                    </td>
                                     <td class="font-weight-bold"><?php if ($literasi['39'][$i] / $literasi['48'][$i] > $literasi['45'][$i] / $literasi['48'][$i]) {
-																			echo "<i class='fa-solid fa-check'></i>";
+																			echo "Diterima";
 																		} ?></td>
                                     <td class="font-weight-bold"><?php if ($literasi['39'][$i] / $literasi['48'][$i] < $literasi['45'][$i] / $literasi['48'][$i]) {
-																			echo "<i class='fa-solid fa-check'></i>";
+																			echo "Tidak Diterima";
 																		} ?></td>
                                     <!-- <td></td>
                             <td><?php if ($literasi['39'][$i] / $literasi['48'][$i] > $literasi['45'][$i] / $literasi['48'][$i]) {
@@ -61,6 +65,15 @@
     </div>
 
 </div>
+
+
+
+
+
+
+
+
+
 
 
 

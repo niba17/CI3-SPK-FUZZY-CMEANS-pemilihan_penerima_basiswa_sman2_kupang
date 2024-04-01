@@ -20,7 +20,7 @@
                         <th>Jenis Kelamin</th>
                         <th>Kelas</th>
                         <th>Tahun Angkatan</th>
-                        <th>Nama Beasiswa</th>
+                        <!-- <th>Nama Beasiswa</th> -->
                         <th>Tahun Beasiswa</th>
                         <th style="width:100px;">Aksi</th>
                     </thead>
@@ -32,9 +32,17 @@
                             <td><?= $s->nama; ?></td>
                             <td><?= $s->nis; ?></td>
                             <td><?= $s->jk; ?></td>
-                            <td><?= $s->kelas; ?></td>
+                            <td>
+                                <?php if (isset($s->kelas)) : ?>
+                                <?= $s->kelas['tingkat'] ?> <?= $s->kelas['jurusan'] ?>
+                                <?= $s->kelas['nama_kelas'] ?>
+                                <?php endif; ?>
+                                <?php if (!isset($s->kelas)) : ?>
+                                <span class="text-danger">Kelas belum dipilih</span>
+                                <?php endif; ?>
+                            </td>
                             <td><?= $s->tahun_angkatan; ?></td>
-                            <td><?= $s->nama_beasiswa; ?></td>
+                            <!-- <td><?= $s->nama_beasiswa; ?></td> -->
                             <td><?= $s->tahun_beasiswa; ?></td>
                             <td>
                                 <a href="<?= base_url('Admin/index_ubah_data/') . $s->id_siswa; ?>"
@@ -52,6 +60,16 @@
 
                     </tbody>
                 </table>
+
+
+
+
+
+
+
+
+
+
 
 
 

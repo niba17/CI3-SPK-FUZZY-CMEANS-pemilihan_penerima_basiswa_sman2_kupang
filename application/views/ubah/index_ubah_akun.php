@@ -40,10 +40,11 @@
                 </div>
 
                 <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Simpan <i
+                    <button class="btn btn-primary btn-sm" type="submit">Simpan <i
                             class="fa-solid fa-angles-down"></i></button>
                 </div>
             </form><!-- End Custom Styled Validation -->
+
 
 
 

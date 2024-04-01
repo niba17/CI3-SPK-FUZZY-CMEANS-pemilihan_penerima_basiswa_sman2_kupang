@@ -56,8 +56,8 @@
                             <th>Kelas</th>
                             <th>k1</th>
                             <th>k2</th>
-                            <th>c1</th>
-                            <th>c2</th>
+                            <th>Diterima (<?= $j_c1; ?>)</th>
+                            <th>Tidak Diterima (<?= $j_c2; ?>)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,18 +66,26 @@
 						for ($i = 0; $i < count($siswa); $i++) : ?>
                         <tr>
                             <td class="font-weight-bold text-center"><?= $no++ ?></td>
-                            <td class="text-center"><?= $siswa[$i]['nama'] ?></td>
-                            <td class="text-center"><?= $siswa[$i]['nis'] ?></td>
-                            <td class="text-center"><?= $siswa[$i]['jk'] ?></td>
-                            <td class="text-center"><?= $siswa[$i]['kelas'] ?></td>
+                            <td class="text-center"><?= $siswa[$i]->nama ?></td>
+                            <td class="text-center"><?= $siswa[$i]->nis ?></td>
+                            <td class="text-center"><?= $siswa[$i]->jk ?></td>
+                            <td>
+                                <?php if (isset($siswa[$i]->kelas)) : ?>
+                                <?= $siswa[$i]->kelas['tingkat'] ?> <?= $siswa[$i]->kelas['jurusan'] ?>
+                                <?= $siswa[$i]->kelas['nama_kelas'] ?>
+                                <?php endif; ?>
+                                <?php if (!isset($siswa[$i]->kelas)) : ?>
+                                <span class="text-danger">Kelas belum dipilih</span>
+                                <?php endif; ?>
+                            </td>
                             <td class="text-center"><?= $literasi['39'][$i] / $literasi['48'][$i]; ?></td>
                             <td class="text-center"><?= $literasi['45'][$i] / $literasi['48'][$i]; ?></td>
                             <td class="text-center"><?php if ($literasi['39'][$i] / $literasi['48'][$i] > $literasi['45'][$i] / $literasi['48'][$i]) {
-																					echo "<i class='fa-solid fa-check'></i>";
-																				} ?></td>
+															echo "Diterima";
+														} ?></td>
                             <td class="text-center"><?php if ($literasi['39'][$i] / $literasi['48'][$i] < $literasi['45'][$i] / $literasi['48'][$i]) {
-																					echo "<i class='fa-solid fa-check'></i>";
-																				} ?></td>
+															echo "Tidak Diterima";
+														} ?></td>
                         </tr>
                         <?php endfor; ?>
                     </tbody>

@@ -13,7 +13,7 @@
     <div class="card mt-3">
         <div class="card-body">
             <div class="row mt-3">
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-lg-12 col-sm-12">
                     <div class="table-responsive" style="font-size: 12px;">
                         <table class="text-center table table-striped" id="" width="100%" cellspacing="0">
                             <thead class="font-weight-bold table-primary">
@@ -41,41 +41,14 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-sm-12">
-                    <div class="table-responsive" style="font-size: 12px;">
-                        <table class="text-center table table-striped" id="" width="100%" cellspacing="0">
-                            <tr>
-                                <td class="font-weight-bold">C</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Max Literasi</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">W</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Error Terkecil</td>
-                                <td>0.01</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">P0</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">t</td>
-                                <td>1</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+
             </div>
 
         </div>
     </div>
 </div>
+
+
 
 
 

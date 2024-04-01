@@ -40,26 +40,22 @@
                         <option value="Perempuan">Perempuan</option>
                     </select>
 
-                    <small class="text-danger"><?php echo form_error('kelas'); ?></small>
+                    <small class="text-danger"><?php echo form_error('jk'); ?></small>
                 </div>
                 <div class="col-md-4">
                     <label for="validationCustom03" class="form-label">Kelas</label>
-                    <select class="form-select <?php if (form_error('kelas')) {
+                    <select class="form-select <?php if (form_error('kelas_id')) {
 													echo 'is-invalid';
-												} ?>" id="validationCustom03" name="kelas">
-                        <option value="" selected="" disabled>Pilih Kelas...</option>
-                        <option value="10 A">10 A</option>
-                        <option value="10 B">10 B</option>
-                        <option value="10 C">10 C</option>
-                        <option value="11 A">11 A</option>
-                        <option value="11 B">11 B</option>
-                        <option value="11 C">11 C</option>
-                        <option value="12 A">12 A</option>
-                        <option value="12 B">12 B</option>
-                        <option value="12 C">12 C</option>
+												} ?>" id="validationCustom03" name="kelas_id">
+                        <option value="" selected disabled>Pilih Kelas...</option>
+                        <?php foreach ($kelas_fix as $key => $value) : ?>
+                        <option value="<?= $value['id'] ?>">
+                            <?= $value['tingkat'] ?> <?= $value['jurusan'] ?> <?= $value['nama_kelas'] ?>
+                        </option>
+                        <?php endforeach; ?>
                     </select>
 
-                    <small class="text-danger"><?php echo form_error('kelas'); ?></small>
+                    <small class="text-danger"><?php echo form_error('kelas_id'); ?></small>
                 </div>
                 <div class="col-md-4">
                     <label for="validationCustom04" class="form-label">Tahun Angkatan</label>
@@ -69,14 +65,14 @@
 
                     <small class="text-danger"><?php echo form_error('tahunAngkatan'); ?></small>
                 </div>
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                     <label for="validationCustom05" class="form-label">Beasiswa</label>
                     <input type="text" class="form-control <?php if (form_error('namaBeasiswa')) {
 																echo 'is-invalid';
 															} ?>" id="validationCustom05" name="namaBeasiswa" value="<?php echo set_value('namaBeasiswa'); ?>">
 
                     <small class="text-danger"><?php echo form_error('namaBeasiswa'); ?></small>
-                </div>
+                </div> -->
                 <div class="col-md-4">
                     <label for="validationCustom06" class="form-label">Tahun Beasiswa</label>
                     <input type="number" class="form-control <?php if (form_error('tahunBeasiswa')) {
@@ -86,43 +82,82 @@
                     <small class="text-danger"><?php echo form_error('tahunBeasiswa'); ?></small>
                 </div>
                 <div class="col-md-4">
-                    <label for="validationCustom07" class="form-label">Tanggungan Orangtua</label>
-                    <input type="number" class="form-control <?php if (form_error('tanggunganOrtu')) {
-																	echo 'is-invalid';
-																} ?>" id="validationCustom07" name="tanggunganOrtu" value="<?php echo set_value('tanggunganOrtu'); ?>">
+                    <label for="validationCustom07" class="form-label">Tanggungan Ortu</label>
+                    <select class="form-select <?php if (form_error('tanggunganOrtu')) {
+													echo 'is-invalid';
+												} ?>" id="validationCustom07" name="tanggunganOrtu">
+                        <option value="" selected disabled>Pilih Tanggungan Ortu...</option>
+                        <option value="0">1</option>
+                        <option value="0.25">2</option>
+                        <option value="0.5">3</option>
+                        <option value="0.75">4</option>
+                        <option value="1">> 4</option>
+                    </select>
 
                     <small class="text-danger"><?php echo form_error('tanggunganOrtu'); ?></small>
                 </div>
                 <div class="col-md-4">
-                    <label for="validationCustom08" class="form-label">Penghasilan Orangtua</label>
-                    <input type="text" class="form-control <?php if (form_error('penghasilanOrtu')) {
-																echo 'is-invalid';
-															} ?>" id="validationCustom08" name="penghasilanOrtu"
-                        value="<?php echo set_value('penghasilanOrtu'); ?>">
+                    <label for="validationCustom08" class="form-label">Penghasilan Ortu</label>
+                    <select class="form-select <?php if (form_error('penghasilanOrtu')) {
+													echo 'is-invalid';
+												} ?>" id="validationCustom08" name="penghasilanOrtu">
+                        <option value="" selected disabled>Pilih Penghasilan Ortu...</option>
+                        <option value="0">>= 5.000.000</option>
+                        <option value="0.25">>= 3.000.000 & < 5.000.000</option>
+                        <option value="0.5">>= 1.500.000 & < 3.000.000</option>
+                        <option value="0.75">>= 1.000.000 & < 1.500.000</option>
+                        <option value="1">
+                            < 1.000.000</option>
+                    </select>
 
                     <small class="text-danger"><?php echo form_error('penghasilanOrtu'); ?></small>
                 </div>
                 <div class="col-md-4">
                     <label for="validationCustom09" class="form-label">Tagihan Air</label>
-                    <input type="text" class="form-control <?php if (form_error('tagihanAir')) {
-																echo 'is-invalid';
-															} ?>" id="validationCustom09" name="tagihanAir" value="<?php echo set_value('tagihanAir'); ?>">
+                    <select class="form-select <?php if (form_error('tagihanAir')) {
+													echo 'is-invalid';
+												} ?>" id="validationCustom09" name="tagihanAir">
+                        <option value="" selected disabled>Pilih Tagihan Air...</option>
+                        <option value="0">>= 300000</option>
+                        <option value="0.25">>= 200000 & < 300000</option>
+                        <option value="0.5">>= 100000 & < 200000</option>
+                        <option value="0.75">>= 50000 & < 100000</option>
+                        <option value="1">
+                            < 50000</option>
+                    </select>
 
                     <small class="text-danger"><?php echo form_error('tagihanAir'); ?></small>
                 </div>
                 <div class="col-md-4">
                     <label for="validationCustom010" class="form-label">Tagihan Listrik</label>
-                    <input type="text" class="form-control <?php if (form_error('tagihanListrik')) {
-																echo 'is-invalid';
-															} ?>" id="validationCustom010" name="tagihanListrik" value="<?php echo set_value('tagihanListrik'); ?>">
+                    <select class="form-select <?php if (form_error('tagihanListrik')) {
+													echo 'is-invalid';
+												} ?>" id="validationCustom010" name="tagihanListrik">
+                        <option value="" selected disabled>Pilih Tagihan Listrik...</option>
+                        <option value="0">>= 300000</option>
+                        <option value="0.25">>= 200000 & < 300000</option>
+                        <option value="0.5">>= 100000 & < 200000</option>
+                        <option value="0.75">>= 50000 & < 100000</option>
+                        <option value="1">
+                            < 50000</option>
+                    </select>
 
                     <small class="text-danger"><?php echo form_error('tagihanListrik'); ?></small>
                 </div>
                 <div class="col-md-4">
-                    <label for="validationCustom011" class="form-label">Nilai Raport</label>
-                    <input type="text" class="form-control <?php if (form_error('nilaiRaport')) {
-																echo 'is-invalid';
-															} ?>" id="validationCustom011" name="nilaiRaport" value="<?php echo set_value('nilaiRaport'); ?>">
+                    <label for="validationCustom011" class="form-label">Nilai Raport Terakhir</label>
+                    <select class="form-select <?php if (form_error('nilaiRaport')) {
+													echo 'is-invalid';
+												} ?>" id="validationCustom011" name="nilaiRaport">
+                        <option value="" selected disabled>Pilih Nilai Raport...</option>
+                        <option value="0">
+                            <= 60</option>
+                        <option value="0.25">> 60 & <= 69.99</option>
+                        <option value="0.5">> 69.99 & <= 79.99</option>
+                        <option value="0.75">> 79.99 & <= 89.99</option>
+                        <option value="1">
+                            > 89.99 & <= 100</option>
+                    </select>
 
                     <small class="text-danger"><?php echo form_error('nilaiRaport'); ?></small>
                 </div>
@@ -195,6 +230,49 @@
     </
 form> 
 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
